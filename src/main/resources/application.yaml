@@ -1,0 +1,64 @@
+quarkus:
+  native:
+    additional-build-args: "--allow-incomplete-classpath"
+  http:
+    port: 8080
+  datasource:
+    db-kind: mssql
+    username: ${QUARKUS_DATASOURCE_JDBC_USERNAME:sa}
+    password: ${QUARKUS_DATASOURCE_JDBC_PASSWORD:DEV-pw-123}
+    jdbc:
+      max-size: 16
+      url: ${QUARKUS_DATASOURCE_JDBC_URL:jdbc:sqlserver://localhost;databaseName=develop}
+  application:
+    name: email-api
+  flyway:
+    migrate-at-start: true
+  resteasy:
+    path: ${QUARKUS_RESTEASY_PATH:email-api}
+  qpid-jms:
+    url: ${QUARKUS_QPID_JMS_URL:amqp://localhost:5672}
+    username: ${QUARKUS_QPID_JMS_USERNAME:admin}
+    password: ${QUARKUS_QPID_JMS_PASSWORD:admin}
+queue:
+  prefix: ${QUEUE_PREFIX:emailV3}
+  creation: ${QUEUE_CREATION:creation}
+  status: ${QUEUE_STATUS:status}
+service-info:
+  id: "${SERVICE_INFO_ID:email-api}"
+  name: "${SERVICE_INFO_NAME:email-api}"
+  description: "${SERVICE_INFO_DESCRIPTION:Email - API}"
+  protocol: "${SERVICE_INFO_PROTOCOL:https}"
+  owners: "{SERIVCE_INFO_OWNERS:District09}"
+  version: "${SERVICE_INFO_VERSION:3.0.0}"
+  host: "${SERVICE_INFO_HOST:localhost:8080}"
+  projectRepo: "${SERVICE_INFO_PROJECT_REPO:https://github.com/district09/email-api.git}"
+  projectHome: "${SERVICE_INFO_PROJECT_HOME:https://github.com/district09/email-api.git}"
+"%dev":
+  quarkus:
+    datasource:
+      username: sa
+      password: DEV-pw-123
+      jdbc:
+        url: jdbc:sqlserver://localhost;databaseName=develop
+    qpid-jms:
+      url: amqp://localhost:5672
+      username: admin
+      password: admin
+  application:
+    security: '{"my_application_id": ["test@mail.be", "test2@mail.be"], "my_other_application_id": ["foo@bar.be"]}'
+"%test":
+   quarkus:
+     datasource:
+       db-kind: h2
+       jdbc:
+          url: jdbc:h2:mem:test;DB_CLOSE_DELAY=-1
+     flyway:
+       migrate-at-start: false
+     hibernate-orm:
+       database:
+         generation: "drop-and-create"
+     qpid-jms:
+       url: amqp://localhost:5672
+   application:
+     security: '{"my_application_id": ["test@mail.be", "test2@mail.be"], "my_other_application_id": ["foo@bar.be"]}'
