@@ -35,7 +35,7 @@ service-info:
   projectRepo: "${SERVICE_INFO_PROJECT_REPO:https://github.com/district09/email-api.git}"
   projectHome: "${SERVICE_INFO_PROJECT_HOME:https://github.com/district09/email-api.git}"
 application:
-    security: "${APPLICATION_SECURITY:"test"}"
+    security: "${APPLICATION_SECURITY:test}"
 "%dev":
   quarkus:
     datasource:
