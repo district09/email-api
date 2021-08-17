@@ -34,6 +34,8 @@ service-info:
   host: "${SERVICE_INFO_HOST:localhost:8080}"
   projectRepo: "${SERVICE_INFO_PROJECT_REPO:https://github.com/district09/email-api.git}"
   projectHome: "${SERVICE_INFO_PROJECT_HOME:https://github.com/district09/email-api.git}"
+application:
+    security: "${APPLICATION_SECURITY:{my_application_id: [test@mail.be, test2@mail.be], my_other_application_id: ["foo@bar.be"]}}"
 "%dev":
   quarkus:
     datasource:
