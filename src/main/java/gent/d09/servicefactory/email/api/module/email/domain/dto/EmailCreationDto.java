@@ -2,6 +2,7 @@ package gent.d09.servicefactory.email.api.module.email.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import gent.d09.servicefactory.email.api.module.email.domain.Attachment;
+import io.quarkus.runtime.annotations.RegisterForReflection;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@RegisterForReflection
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class EmailCreationDto {
     public String from;

@@ -1,10 +1,13 @@
 package gent.d09.servicefactory.email.api.module.email.domain.event;
+import io.quarkus.runtime.annotations.RegisterForReflection;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@RegisterForReflection
 public class EmailStatusEvent extends Event {
     private String status;
     private String statusMessage;

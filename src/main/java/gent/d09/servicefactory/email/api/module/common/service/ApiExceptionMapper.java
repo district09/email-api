@@ -1,6 +1,7 @@
 package gent.d09.servicefactory.email.api.module.common.service;
 
 import gent.d09.servicefactory.email.api.module.common.domain.dto.ApiError;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,7 +19,7 @@ public class ApiExceptionMapper implements ExceptionMapper<Exception> {
 
     @Override
     public Response toResponse(Exception e) {
-        log.error("Request failed: " + e.getMessage());
+        log.error("Request failed: " + e.getMessage() + " | Stacktrace: " + ExceptionUtils.getStackTrace(e));
 
         int code = 500;
         if(e instanceof WebApplicationException) {
