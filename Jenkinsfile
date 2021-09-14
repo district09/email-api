@@ -7,4 +7,5 @@ d09Project  kind: "maven",
             service: ["email-api-v3"],
             gitOpsPath: "email-service/email-api-v3",
             skipTest: "true",
-            skipBuild: "true"
+            skipBuild: "true",
+            useSemanticRelease: "true"
